@@ -7,10 +7,17 @@ defmodule WebhooksWeb.WebhookController do
   end
 
   def receive_webhook(conn, params) do
-    params
-    |> ExNylas.WebhookNotifications.to_struct!()
-    |> then(&Logger.info(inspect(&1, pretty: true)))
+    transform_and_log(params)
 
     send_resp(conn, 200, "")
+  end
+
+  defp transform_and_log(params) do
+    case ExNylas.WebhookNotifications.to_struct(params) do
+      {:ok, struct} ->
+        Logger.info(inspect(struct, pretty: true))
+      {:error, message} ->
+        Logger.error("Error transforming webhook params: #{inspect(message, pretty: true)}")
+    end
   end
 end
