@@ -32,7 +32,7 @@ defmodule Webhooks.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:ex_nylas, git: "https://github.com/nicholasbair/ex_nylas.git", tag: "v0.5.0"},
+      {:ex_nylas, git: "https://github.com/nicholasbair/ex_nylas.git", branch: "main"},
       {:phoenix, "~> 1.7.12"},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:telemetry_metrics, "~> 1.0"},

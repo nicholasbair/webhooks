@@ -12,7 +12,7 @@ defmodule WebhooksWeb.WebhookUtil do
     header = get_header(conn, "x-nylas-signature")
     body = conn.private.raw_body
 
-    case ExNylas.WebhookNotifications.valid_signature(secret, body, header) do
+    case ExNylas.WebhookNotifications.validate_signature(secret, body, header) do
       {:ok, true} ->
         conn
 
@@ -51,5 +51,4 @@ defmodule WebhooksWeb.WebhookUtil do
     |> send_resp(401, "Unauthorized")
     |> halt()
   end
-
 end
